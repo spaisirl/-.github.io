@@ -1,0 +1,18 @@
+java web servlet
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String id = request.getParameter("id");
+		String pw = request.getParameter("pw");
+		LoginDTO dto = memberDAO.loginInfo(id, pw);
+		LoginDTO dto =  (LoginDTO)session.getAttribute("loginDTO");
+
+}
+		-> 오류
+
+		-> 해결
+		LoginDTO dto =  (LoginDTO)session.getAttribute("loginDTO");
+		// 여기서 LoginDTO dto 써서 실행 안 됐음.
+		// LoginDTO loginDTO =  (LoginDTO)session.getAttribute("loginDTO"); 하니까 해결 완료.
+		
+		// LoginDTO dto <- 지역변수라서 dto 로 쓸 수 있다. 다만, getAttribute("loginDTO") -> loginDTO는 LoginServlet 
+		에서 session.setAttribute("loginDTO", dto); 라고 써서 "loginDTO" 로 써야 한다.
